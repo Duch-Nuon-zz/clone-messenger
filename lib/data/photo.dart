@@ -1,0 +1,26 @@
+List photo = [
+  'images/myprofile.jpg',
+  'images/images1.jpg',
+  'images/image.jpg',
+  'images/pic1.jpg',
+  'images/TanjiRo.jpg',
+  'images/maxresdefault.jpg',
+  'images/images2.jpg',
+  'images/believe.jpg',
+  'images/friends.jpg',
+  'images/the secrets.jpeg',
+  'images/messenger.png',
+];
+List Name = [
+  'Duch Nuon',
+  'Sasuke',
+  'NaruTo',
+  'Tanjiro',
+  'Hinata',
+  'Sakura',
+  'Duch Sok Phea',
+  'Sakaj Khos',
+  'Sok Kavinh',
+  'San Sok',
+  'Sao Moav',
+];
