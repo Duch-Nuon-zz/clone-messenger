@@ -1,5 +1,5 @@
-import 'package:clone_chat/data/photo.dart';
-import 'package:clone_chat/screens/chat.dart';
+import 'package:clone_chat/screens/people.dart';
+import 'package:clone_chat/screens/storychat.dart';
 import 'package:flutter/material.dart';
 
 class ContactScreen extends StatefulWidget {
@@ -8,148 +8,35 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
+  final List<Widget> _listPage = [StoryChat(), People()];
+  int currentIndexPage = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: ListView(
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      CircleAvatar(
-                        backgroundImage: AssetImage('images/TanjiRo.jpg'),
-                        radius: 20,
-                      ),
-                      SizedBox(width: 20),
-                      Text(
-                        'Chats',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 30,
-                            color: Colors.black),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Container(
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey.withOpacity(0.1),
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.camera_alt,
-                              color: Colors.black,
-                            ),
-                            onPressed: null,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Container(
-                        child: CircleAvatar(
-                          backgroundColor: Colors.grey.withOpacity(0.1),
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.edit,
-                              color: Colors.black,
-                            ),
-                            onPressed: null,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Container(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      prefixIcon: Icon(
-                        Icons.search,
-                        size: 26,
-                        color: Colors.grey[500],
-                      ),
-                      hintText: 'Search',
-                      hintStyle: TextStyle(
-                        fontSize: 23,
-                      ),
-                    ),
-                  ),
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(25),
-                ),
-              ),
-            ),
-            Container(
-              width: double.infinity,
-              height: 90,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: photo.length,
-                itemBuilder: (context, index) {
-                  return index == 0
-                      ? Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 20),
-                          child: Column(
-                            children: <Widget>[
-                              CircleAvatar(
-                                child: IconButton(
-                                  icon: Icon(
-                                    Icons.video_call,
-                                    size: 35,
-                                    color: Colors.black,
-                                  ),
-                                  onPressed: () {},
-                                ),
-                                radius: 35,
-                                backgroundColor: Colors.grey.withOpacity(0.1),
-                              ),
-                            ],
-                          ),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.only(left: 20, top: 20),
-                          child: Container(
-                            width: 70,
-                            decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(40),
-                              image: DecorationImage(
-                                  image: AssetImage(photo[index]),
-                                  fit: BoxFit.cover),
-                            ),
-                          ),
-                        );
-                },
-              ),
-            ),
-            Chat(),
+            _listPage[currentIndexPage],
           ],
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        unselectedItemColor: Colors.grey,
         backgroundColor: Colors.white,
         selectedItemColor: Colors.black,
+        currentIndex: currentIndexPage,
         elevation: 10,
+        onTap: (value) {
+          setState(() {
+            currentIndexPage = value;
+          });
+        },
         items: [
           BottomNavigationBarItem(
             icon: Icon(
               Icons.chat,
-              size: 30,
+              size: 20,
             ),
             title: Text(
               'Chat',
@@ -160,12 +47,9 @@ class _ContactScreenState extends State<ContactScreen> {
             ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              Icons.group,
-              size: 30,
-            ),
+            icon: Icon(Icons.group, size: 20),
             title: Text(
-              'Chat',
+              'People',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,

@@ -11,7 +11,7 @@ List photo = [
   'images/the secrets.jpeg',
   'images/messenger.png',
 ];
-List Name = [
+List name = [
   'Duch Nuon',
   'Sasuke',
   'NaruTo',
